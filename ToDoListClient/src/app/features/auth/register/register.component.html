@@ -1,0 +1,106 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h1>📝 To-Do List</h1>
+      <p>Crea tu cuenta para comenzar</p>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="auth-form">
+      <div class="form-group">
+        <label for="name">Nombre</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          placeholder="Tu nombre"
+          [class.error]="name?.invalid && name?.touched"
+        />
+        @if (name?.invalid && name?.touched) {
+          <span class="error-message">
+            @if (name?.errors?.['required']) {
+              El nombre es requerido
+            } @else if (name?.errors?.['minlength']) {
+              El nombre debe tener al menos 2 caracteres
+            }
+          </span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="tu@email.com"
+          [class.error]="email?.invalid && email?.touched"
+        />
+        @if (email?.invalid && email?.touched) {
+          <span class="error-message">
+            @if (email?.errors?.['required']) {
+              El email es requerido
+            } @else if (email?.errors?.['email']) {
+              Ingrese un email válido
+            }
+          </span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <div class="password-input">
+          <input
+            [type]="showPassword() ? 'text' : 'password'"
+            id="password"
+            formControlName="password"
+            placeholder="••••••••"
+            [class.error]="password?.invalid && password?.touched"
+          />
+          <button type="button" class="toggle-password" (click)="togglePassword()">
+            {{ showPassword() ? '🙈' : '👁️' }}
+          </button>
+        </div>
+        @if (password?.invalid && password?.touched) {
+          <span class="error-message">
+            @if (password?.errors?.['required']) {
+              La contraseña es requerida
+            } @else if (password?.errors?.['minlength']) {
+              La contraseña debe tener al menos 6 caracteres
+            }
+          </span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirmar Contraseña</label>
+        <input
+          [type]="showPassword() ? 'text' : 'password'"
+          id="confirmPassword"
+          formControlName="confirmPassword"
+          placeholder="••••••••"
+          [class.error]="(confirmPassword?.invalid || registerForm.errors?.['passwordMismatch']) && confirmPassword?.touched"
+        />
+        @if (confirmPassword?.touched) {
+          @if (confirmPassword?.errors?.['required']) {
+            <span class="error-message">Confirme su contraseña</span>
+          } @else if (registerForm.errors?.['passwordMismatch']) {
+            <span class="error-message">Las contraseñas no coinciden</span>
+          }
+        }
+      </div>
+
+      <button type="submit" class="btn-primary" [disabled]="loading()">
+        @if (loading()) {
+          <span class="spinner"></span>
+          Creando cuenta...
+        } @else {
+          Crear Cuenta
+        }
+      </button>
+    </form>
+
+    <div class="auth-footer">
+      <p>¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a></p>
+    </div>
+  </div>
+</div>
