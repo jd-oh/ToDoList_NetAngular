@@ -1,0 +1,45 @@
+<div class="layout">
+  <header class="header">
+    <div class="header-content">
+      <a routerLink="/dashboard" class="logo">📝 To-Do List</a>
+      
+      <nav class="nav">
+        <a routerLink="/dashboard" routerLinkActive="active" class="nav-link">
+          📊 Dashboard
+        </a>
+        <a routerLink="/tasks" routerLinkActive="active" class="nav-link">
+          📋 Tareas
+        </a>
+      </nav>
+
+      <div class="user-menu">
+        <span class="user-name">{{ authService.currentUser()?.name }}</span>
+        <button class="btn-logout" (click)="logout()">
+          🚪 Salir
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Notifications -->
+  <div class="notifications-container">
+    @for (notification of notificationService.notifications(); track notification.id) {
+      <div class="notification" [class]="'notification-' + notification.type">
+        <span class="notification-icon">
+          @switch (notification.type) {
+            @case ('success') { ✅ }
+            @case ('error') { ❌ }
+            @case ('warning') { ⚠️ }
+            @default { ℹ️ }
+          }
+        </span>
+        <span class="notification-message">{{ notification.message }}</span>
+        <button class="notification-close" (click)="removeNotification(notification.id)">×</button>
+      </div>
+    }
+  </div>
+</div>

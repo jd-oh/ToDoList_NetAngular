@@ -1,0 +1,37 @@
+<div class="todo-item" [class.completed]="todo.isCompleted">
+  <div class="todo-checkbox">
+    <input 
+      type="checkbox" 
+      [checked]="todo.isCompleted" 
+      (change)="onToggle()"
+      [id]="'todo-' + todo.id"
+    />
+    <label [for]="'todo-' + todo.id" class="checkbox-label"></label>
+  </div>
+
+  <div class="todo-content">
+    <h3 class="todo-title">{{ todo.title }}</h3>
+    @if (todo.description) {
+      <p class="todo-description">{{ todo.description }}</p>
+    }
+    <div class="todo-meta">
+      <span class="todo-date">
+        📅 {{ formatDate(todo.createdAt) }}
+      </span>
+      @if (todo.completedAt) {
+        <span class="todo-completed-date">
+          ✅ Completada: {{ formatDate(todo.completedAt) }}
+        </span>
+      }
+    </div>
+  </div>
+
+  <div class="todo-actions">
+    <button class="btn-icon btn-edit" (click)="onEdit()" title="Editar">
+      ✏️
+    </button>
+    <button class="btn-icon btn-delete" (click)="onDelete()" title="Eliminar">
+      🗑️
+    </button>
+  </div>
+</div>
