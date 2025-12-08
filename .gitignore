@@ -1,0 +1,24 @@
+## Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Build results
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/
+
+## Angular
+node_modules/
+dist/
+.angular/
+*.log
+
+## Others
+*.cache
+*.dll
+*.exe
+*.pdb
