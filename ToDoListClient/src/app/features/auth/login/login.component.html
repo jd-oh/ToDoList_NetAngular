@@ -5,7 +5,7 @@
         <mat-icon>task_alt</mat-icon>
         To-Do List
       </mat-card-title>
-      <mat-card-subtitle>Inicia sesión para gestionar tus tareas</mat-card-subtitle>
+      <mat-card-subtitle>Inicia sesiÃ³n para gestionar tus tareas</mat-card-subtitle>
     </mat-card-header>
     
     <mat-card-content>
@@ -21,13 +21,13 @@
             @if (email?.errors?.['required']) {
               <mat-error>El email es requerido</mat-error>
             } @else if (email?.errors?.['email']) {
-              <mat-error>Ingrese un email válido</mat-error>
+              <mat-error>Ingrese un email vï¿½lido</mat-error>
             }
           }
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Contraseña</mat-label>
+          <mat-label>ContraseÃ±a</mat-label>
           <input matInput 
                  [type]="showPassword() ? 'text' : 'password'" 
                  formControlName="password"
@@ -37,9 +37,9 @@
           </button>
           @if (password?.invalid && password?.touched) {
             @if (password?.errors?.['required']) {
-              <mat-error>La contraseña es requerida</mat-error>
+              <mat-error>La contraseÃ±a es requerida</mat-error>
             } @else if (password?.errors?.['minlength']) {
-              <mat-error>La contraseña debe tener al menos 6 caracteres</mat-error>
+              <mat-error>La contraseÃ±a debe tener al menos 6 caracteres</mat-error>
             }
           }
         </mat-form-field>
@@ -51,7 +51,7 @@
                   class="full-width submit-btn"
                   disabled>
             <mat-spinner diameter="20"></mat-spinner>
-            <span>Iniciando sesión...</span>
+            <span>Iniciando sesiÃ³n...</span>
           </button>
         } @else {
           <button mat-raised-button 
@@ -59,7 +59,7 @@
                   type="submit" 
                   class="full-width submit-btn">
             <mat-icon>login</mat-icon>
-            <span>Iniciar Sesión</span>
+            <span>Iniciar SesiÃ³n</span>
           </button>
         }
       </form>
@@ -67,18 +67,10 @@
 
     <mat-card-actions>
       <p class="register-link">
-        ¿No tienes cuenta? 
-        <a mat-button color="accent" routerLink="/register">Regístrate</a>
+        Â¿No tienes cuenta? 
+        <a mat-button color="accent" routerLink="/register">RegÃ­strate</a>
       </p>
     </mat-card-actions>
 
-    <div class="demo-credentials">
-      <mat-icon>info</mat-icon>
-      <div>
-        <p><strong>Credenciales de prueba:</strong></p>
-        <p>Email: test&#64;example.com</p>
-        <p>Contraseña: password123</p>
-      </div>
-    </div>
   </mat-card>
 </div>
