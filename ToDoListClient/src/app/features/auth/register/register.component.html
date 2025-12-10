@@ -5,7 +5,7 @@
         <mat-icon>person_add</mat-icon>
         Crear Cuenta
       </mat-card-title>
-      <mat-card-subtitle>Únete a To-Do List y organiza tus tareas</mat-card-subtitle>
+      <mat-card-subtitle>Ãšnete a To-Do List y organiza tus tareas</mat-card-subtitle>
     </mat-card-header>
     
     <mat-card-content>
@@ -37,41 +37,41 @@
             @if (email?.errors?.['required']) {
               <mat-error>El email es requerido</mat-error>
             } @else if (email?.errors?.['email']) {
-              <mat-error>Ingrese un email válido</mat-error>
+              <mat-error>Ingrese un email vÃ¡lido</mat-error>
             }
           }
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Contraseña</mat-label>
+          <mat-label>ContraseÃ±a</mat-label>
           <input matInput 
                  [type]="showPassword() ? 'text' : 'password'" 
                  formControlName="password"
-                 placeholder="Mínimo 6 caracteres">
+                 placeholder="MÃ­nimo 6 caracteres">
           <button mat-icon-button matSuffix type="button" (click)="togglePassword()">
             <mat-icon>{{ showPassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
           @if (password?.invalid && password?.touched) {
             @if (password?.errors?.['required']) {
-              <mat-error>La contraseña es requerida</mat-error>
+              <mat-error>La contraseÃ±a es requerida</mat-error>
             } @else if (password?.errors?.['minlength']) {
-              <mat-error>La contraseña debe tener al menos 6 caracteres</mat-error>
+              <mat-error>La contraseÃ±a debe tener al menos 6 caracteres</mat-error>
             }
           }
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Confirmar Contraseña</mat-label>
+          <mat-label>Confirmar ContraseÃ±a</mat-label>
           <input matInput 
                  [type]="showPassword() ? 'text' : 'password'" 
                  formControlName="confirmPassword"
-                 placeholder="Repite tu contraseña">
+                 placeholder="Repite tu contraseÃ±a">
           <mat-icon matSuffix>lock</mat-icon>
           @if (confirmPassword?.touched) {
             @if (confirmPassword?.errors?.['required']) {
-              <mat-error>Confirme su contraseña</mat-error>
+              <mat-error>Confirme su contraseÃ±a</mat-error>
             } @else if (registerForm.errors?.['passwordMismatch']) {
-              <mat-error>Las contraseñas no coinciden</mat-error>
+              <mat-error>Las contraseÃ±as no coinciden</mat-error>
             }
           }
         </mat-form-field>
@@ -99,8 +99,8 @@
 
     <mat-card-actions>
       <p class="login-link">
-        ¿Ya tienes cuenta? 
-        <a mat-button color="accent" routerLink="/login">Inicia sesión</a>
+        Â¿Ya tienes cuenta? 
+        <a mat-button color="accent" routerLink="/login">Inicia sesiÃ³n</a>
       </p>
     </mat-card-actions>
   </mat-card>

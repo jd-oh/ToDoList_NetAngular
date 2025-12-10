@@ -6,30 +6,30 @@
   
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Título</mat-label>
+      <mat-label>TÃ­tulo</mat-label>
       <input matInput 
              formControlName="title" 
-             placeholder="¿Qué necesitas hacer?">
+             placeholder="Â¿QuÃ© necesitas hacer?">
       <mat-icon matSuffix>title</mat-icon>
       @if (title?.invalid && title?.touched) {
         @if (title?.errors?.['required']) {
-          <mat-error>El título es requerido</mat-error>
+          <mat-error>El tÃ­tulo es requerido</mat-error>
         } @else if (title?.errors?.['maxlength']) {
-          <mat-error>El título no puede exceder 200 caracteres</mat-error>
+          <mat-error>El tÃ­tulo no puede exceder 200 caracteres</mat-error>
         }
       }
       <mat-hint align="end">{{ form.get('title')?.value?.length || 0 }}/200</mat-hint>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Descripción</mat-label>
+      <mat-label>DescripciÃ³n</mat-label>
       <textarea matInput 
                 formControlName="description" 
-                placeholder="Agrega más detalles (opcional)"
+                placeholder="Agrega mÃ¡s detalles (opcional)"
                 rows="3"></textarea>
       <mat-icon matSuffix>description</mat-icon>
       @if (description?.errors?.['maxlength']) {
-        <mat-error>La descripción no puede exceder 1000 caracteres</mat-error>
+        <mat-error>La descripciÃ³n no puede exceder 1000 caracteres</mat-error>
       }
       <mat-hint align="end">{{ form.get('description')?.value?.length || 0 }}/1000</mat-hint>
     </mat-form-field>
