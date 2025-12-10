@@ -2,10 +2,26 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TodoItem } from '../../../core/models/todo.model';
 
+// Angular Material
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatChipsModule } from '@angular/material/chips';
+
 @Component({
   selector: 'app-todo-item',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule,
+    MatChipsModule
+  ],
   templateUrl: './todo-item.component.html',
   styleUrl: './todo-item.component.css'
 })

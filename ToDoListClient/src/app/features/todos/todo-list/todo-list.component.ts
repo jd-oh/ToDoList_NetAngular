@@ -9,10 +9,27 @@ import { loadTodos, loadDashboard, setFilter, createTodo, updateTodo, deleteTodo
 import { selectFilteredTodos, selectTodosLoading, selectCurrentFilter, selectDashboard } from '../../../store/todo/todo.selectors';
 import { TodoItem, CreateTodoItem, UpdateTodoItem, TodoFilter } from '../../../core/models/todo.model';
 
+// Angular Material
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+
 @Component({
   selector: 'app-todo-list',
   standalone: true,
-  imports: [CommonModule, TodoItemComponent, TodoFormComponent, TodoFilterComponent],
+  imports: [
+    CommonModule, 
+    TodoItemComponent, 
+    TodoFormComponent, 
+    TodoFilterComponent,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatDialogModule
+  ],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.css'
 })

@@ -1,45 +1,87 @@
-<div class="layout">
-  <header class="header">
-    <div class="header-content">
-      <a routerLink="/dashboard" class="logo">📝 To-Do List</a>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="over" [opened]="sidenavOpened()" (closed)="sidenavOpened.set(false)">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/dashboard" routerLinkActive="active" (click)="sidenav.close()">
+        <mat-icon matListItemIcon>dashboard</mat-icon>
+        <span matListItemTitle>Dashboard</span>
+      </a>
+      <a mat-list-item routerLink="/tasks" routerLinkActive="active" (click)="sidenav.close()">
+        <mat-icon matListItemIcon>checklist</mat-icon>
+        <span matListItemTitle>Tareas</span>
+      </a>
+      <mat-divider></mat-divider>
+      <a mat-list-item (click)="logout(); sidenav.close()">
+        <mat-icon matListItemIcon>logout</mat-icon>
+        <span matListItemTitle>Cerrar Sesi�n</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="toolbar">
+      <button mat-icon-button (click)="toggleSidenav()" class="menu-button">
+        <mat-icon>menu</mat-icon>
+      </button>
       
-      <nav class="nav">
-        <a routerLink="/dashboard" routerLinkActive="active" class="nav-link">
-          📊 Dashboard
+      <a routerLink="/dashboard" class="logo">
+        <mat-icon>task_alt</mat-icon>
+        <span>To-Do List</span>
+      </a>
+      
+      <nav class="nav-links">
+        <a mat-button routerLink="/dashboard" routerLinkActive="active-link">
+          <mat-icon>dashboard</mat-icon>
+          Dashboard
         </a>
-        <a routerLink="/tasks" routerLinkActive="active" class="nav-link">
-          📋 Tareas
+        <a mat-button routerLink="/tasks" routerLinkActive="active-link">
+          <mat-icon>checklist</mat-icon>
+          Tareas
         </a>
       </nav>
 
-      <div class="user-menu">
+      <span class="spacer"></span>
+
+      <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
+        <mat-icon>account_circle</mat-icon>
         <span class="user-name">{{ authService.currentUser()?.name }}</span>
-        <button class="btn-logout" (click)="logout()">
-          🚪 Salir
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+
+      <mat-menu #userMenu="matMenu">
+        <button mat-menu-item disabled>
+          <mat-icon>email</mat-icon>
+          <span>{{ authService.currentUser()?.email }}</span>
         </button>
-      </div>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Cerrar Sesi�n</span>
+        </button>
+      </mat-menu>
+    </mat-toolbar>
+
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- Notifications -->
+<div class="notifications-container">
+  @for (notification of notificationService.notifications(); track notification.id) {
+    <div class="notification" [class]="'notification-' + notification.type">
+      <mat-icon class="notification-icon">
+        @switch (notification.type) {
+          @case ('success') { check_circle }
+          @case ('error') { error }
+          @case ('warning') { warning }
+          @default { info }
+        }
+      </mat-icon>
+      <span class="notification-message">{{ notification.message }}</span>
+      <button mat-icon-button class="notification-close" (click)="removeNotification(notification.id)">
+        <mat-icon>close</mat-icon>
+      </button>
     </div>
-  </header>
-
-  <main class="main-content">
-    <router-outlet></router-outlet>
-  </main>
-
-  <!-- Notifications -->
-  <div class="notifications-container">
-    @for (notification of notificationService.notifications(); track notification.id) {
-      <div class="notification" [class]="'notification-' + notification.type">
-        <span class="notification-icon">
-          @switch (notification.type) {
-            @case ('success') { ✅ }
-            @case ('error') { ❌ }
-            @case ('warning') { ⚠️ }
-            @default { ℹ️ }
-          }
-        </span>
-        <span class="notification-message">{{ notification.message }}</span>
-        <button class="notification-close" (click)="removeNotification(notification.id)">×</button>
-      </div>
-    }
-  </div>
+  }
 </div>

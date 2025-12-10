@@ -2,10 +2,20 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TodoFilter, Dashboard } from '../../../core/models/todo.model';
 
+// Angular Material
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatIconModule } from '@angular/material/icon';
+
 @Component({
   selector: 'app-todo-filter',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    MatButtonToggleModule,
+    MatBadgeModule,
+    MatIconModule
+  ],
   templateUrl: './todo-filter.component.html',
   styleUrl: './todo-filter.component.css'
 })

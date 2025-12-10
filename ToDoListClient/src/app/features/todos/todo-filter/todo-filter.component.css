@@ -1,57 +1,70 @@
 .filter-container {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
-.filter-buttons {
-  display: flex;
-  gap: 8px;
-  background: white;
-  padding: 8px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+mat-button-toggle-group {
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.filter-btn {
-  flex: 1;
+mat-button-toggle {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
-  padding: 12px 16px;
-  background: transparent;
-  border: none;
-  border-radius: 8px;
-  font-size: 0.95rem;
+  padding: 0 16px;
+}
+
+::ng-deep .mat-button-toggle-checked {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  color: white !important;
+}
+
+::ng-deep .mat-button-toggle-checked .mat-button-toggle-label-content {
+  color: white !important;
+}
+
+.filter-label {
   font-weight: 500;
-  color: #666;
-  cursor: pointer;
-  transition: all 0.2s ease;
 }
 
-.filter-btn:hover {
-  background: #f8f9fa;
-  color: #333;
-}
-
-.filter-btn.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-}
-
-.count {
+.filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 8px;
   background: rgba(0, 0, 0, 0.1);
-  padding: 2px 8px;
   border-radius: 12px;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
 }
 
-.filter-btn.active .count {
-  background: rgba(255, 255, 255, 0.3);
+::ng-deep .mat-button-toggle-checked .filter-count {
+  background: rgba(255, 255, 255, 0.2);
 }
 
-@media (max-width: 480px) {
-  .filter-buttons {
+.filter-count.pending {
+  color: #e65100;
+}
+
+.filter-count.completed {
+  color: #2e7d32;
+}
+
+::ng-deep .mat-button-toggle-checked .filter-count.pending,
+::ng-deep .mat-button-toggle-checked .filter-count.completed {
+  color: white;
+}
+
+@media (max-width: 600px) {
+  mat-button-toggle-group {
     flex-direction: column;
+    width: 100%;
+  }
+  
+  mat-button-toggle {
+    width: 100%;
+    justify-content: center;
   }
 }

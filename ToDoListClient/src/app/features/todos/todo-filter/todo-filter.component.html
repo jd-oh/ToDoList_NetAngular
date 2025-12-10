@@ -1,14 +1,19 @@
 <div class="filter-container">
-  <div class="filter-buttons">
-    @for (filter of filters; track filter.value) {
-      <button 
-        class="filter-btn"
-        [class.active]="currentFilter === filter.value"
-        (click)="onFilterClick(filter.value)"
-      >
-        {{ filter.label }}
-        <span class="count">{{ getCount(filter.value) }}</span>
-      </button>
-    }
-  </div>
+  <mat-button-toggle-group [value]="currentFilter" (change)="onFilterClick($event.value)">
+    <mat-button-toggle value="all">
+      <mat-icon>list</mat-icon>
+      <span class="filter-label">Todas</span>
+      <span class="filter-count">{{ getCount('all') }}</span>
+    </mat-button-toggle>
+    <mat-button-toggle value="pending">
+      <mat-icon>pending_actions</mat-icon>
+      <span class="filter-label">Pendientes</span>
+      <span class="filter-count pending">{{ getCount('pending') }}</span>
+    </mat-button-toggle>
+    <mat-button-toggle value="completed">
+      <mat-icon>check_circle</mat-icon>
+      <span class="filter-label">Completadas</span>
+      <span class="filter-count completed">{{ getCount('completed') }}</span>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
 </div>

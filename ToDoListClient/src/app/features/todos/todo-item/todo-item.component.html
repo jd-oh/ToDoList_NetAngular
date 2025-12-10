@@ -1,37 +1,48 @@
-<div class="todo-item" [class.completed]="todo.isCompleted">
-  <div class="todo-checkbox">
-    <input 
-      type="checkbox" 
-      [checked]="todo.isCompleted" 
-      (change)="onToggle()"
-      [id]="'todo-' + todo.id"
-    />
-    <label [for]="'todo-' + todo.id" class="checkbox-label"></label>
-  </div>
+<mat-card class="todo-item" [class.completed]="todo.isCompleted">
+  <mat-card-content>
+    <div class="todo-main">
+      <mat-checkbox 
+        [checked]="todo.isCompleted"
+        (change)="onToggle()"
+        color="primary"
+        class="todo-checkbox">
+      </mat-checkbox>
 
-  <div class="todo-content">
-    <h3 class="todo-title">{{ todo.title }}</h3>
-    @if (todo.description) {
-      <p class="todo-description">{{ todo.description }}</p>
-    }
-    <div class="todo-meta">
-      <span class="todo-date">
-        📅 {{ formatDate(todo.createdAt) }}
-      </span>
-      @if (todo.completedAt) {
-        <span class="todo-completed-date">
-          ✅ Completada: {{ formatDate(todo.completedAt) }}
-        </span>
-      }
+      <div class="todo-content">
+        <h3 class="todo-title" [class.completed-text]="todo.isCompleted">
+          {{ todo.title }}
+        </h3>
+        @if (todo.description) {
+          <p class="todo-description">{{ todo.description }}</p>
+        }
+        <div class="todo-meta">
+          <mat-chip class="date-chip">
+            <mat-icon>schedule</mat-icon>
+            {{ formatDate(todo.createdAt) }}
+          </mat-chip>
+          @if (todo.completedAt) {
+            <mat-chip class="completed-chip">
+              <mat-icon>check_circle</mat-icon>
+              {{ formatDate(todo.completedAt) }}
+            </mat-chip>
+          }
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div class="todo-actions">
-    <button class="btn-icon btn-edit" (click)="onEdit()" title="Editar">
-      ✏️
-    </button>
-    <button class="btn-icon btn-delete" (click)="onDelete()" title="Eliminar">
-      🗑️
-    </button>
-  </div>
-</div>
+    <div class="todo-actions">
+      <button mat-icon-button 
+              color="primary" 
+              (click)="onEdit()" 
+              matTooltip="Editar tarea">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button 
+              color="warn" 
+              (click)="onDelete()" 
+              matTooltip="Eliminar tarea">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>

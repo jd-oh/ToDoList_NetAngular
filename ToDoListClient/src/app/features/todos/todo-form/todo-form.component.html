@@ -1,58 +1,54 @@
-<div class="todo-form-card">
-  <h3>{{ isEditMode ? '‚úèÔ∏è Editar Tarea' : '‚ûï Nueva Tarea' }}</h3>
+<div class="todo-form">
+  <div class="form-header">
+    <mat-icon>{{ isEditMode ? 'edit' : 'add_task' }}</mat-icon>
+    <h3>{{ isEditMode ? 'Editar Tarea' : 'Nueva Tarea' }}</h3>
+  </div>
   
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="title">T√≠tulo *</label>
-      <input
-        type="text"
-        id="title"
-        formControlName="title"
-        placeholder="¬øQu√© necesitas hacer?"
-        [class.error]="title?.invalid && title?.touched"
-      />
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>TÌtulo</mat-label>
+      <input matInput 
+             formControlName="title" 
+             placeholder="øQuÈ necesitas hacer?">
+      <mat-icon matSuffix>title</mat-icon>
       @if (title?.invalid && title?.touched) {
-        <span class="error-message">
-          @if (title?.errors?.['required']) {
-            El t√≠tulo es requerido
-          } @else if (title?.errors?.['maxlength']) {
-            El t√≠tulo no puede exceder 200 caracteres
-          }
-        </span>
+        @if (title?.errors?.['required']) {
+          <mat-error>El tÌtulo es requerido</mat-error>
+        } @else if (title?.errors?.['maxlength']) {
+          <mat-error>El tÌtulo no puede exceder 200 caracteres</mat-error>
+        }
       }
-    </div>
+      <mat-hint align="end">{{ form.get('title')?.value?.length || 0 }}/200</mat-hint>
+    </mat-form-field>
 
-    <div class="form-group">
-      <label for="description">Descripci√≥n</label>
-      <textarea
-        id="description"
-        formControlName="description"
-        placeholder="Agrega m√°s detalles (opcional)"
-        rows="3"
-        [class.error]="description?.invalid && description?.touched"
-      ></textarea>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>DescripciÛn</mat-label>
+      <textarea matInput 
+                formControlName="description" 
+                placeholder="Agrega m·s detalles (opcional)"
+                rows="3"></textarea>
+      <mat-icon matSuffix>description</mat-icon>
       @if (description?.errors?.['maxlength']) {
-        <span class="error-message">
-          La descripci√≥n no puede exceder 1000 caracteres
-        </span>
+        <mat-error>La descripciÛn no puede exceder 1000 caracteres</mat-error>
       }
-    </div>
+      <mat-hint align="end">{{ form.get('description')?.value?.length || 0 }}/1000</mat-hint>
+    </mat-form-field>
 
     @if (isEditMode) {
-      <div class="form-group checkbox-group">
-        <label class="checkbox-container">
-          <input type="checkbox" formControlName="isCompleted" />
-          <span class="checkmark"></span>
+      <div class="checkbox-field">
+        <mat-checkbox formControlName="isCompleted" color="primary">
           Marcar como completada
-        </label>
+        </mat-checkbox>
       </div>
     }
 
     <div class="form-actions">
-      <button type="button" class="btn-cancel" (click)="onCancel()">
+      <button mat-stroked-button type="button" (click)="onCancel()">
+        <mat-icon>close</mat-icon>
         Cancelar
       </button>
-      <button type="submit" class="btn-submit">
+      <button mat-raised-button color="primary" type="submit">
+        <mat-icon>{{ isEditMode ? 'save' : 'add' }}</mat-icon>
         {{ isEditMode ? 'Guardar Cambios' : 'Crear Tarea' }}
       </button>
     </div>

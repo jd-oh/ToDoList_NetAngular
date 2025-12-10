@@ -1,74 +1,84 @@
-<div class="auth-container">
-  <div class="auth-card">
-    <div class="auth-header">
-      <h1>📝 To-Do List</h1>
-      <p>Inicia sesión para gestionar tus tareas</p>
-    </div>
-
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="auth-form">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          formControlName="email"
-          placeholder="tu@email.com"
-          [class.error]="email?.invalid && email?.touched"
-        />
-        @if (email?.invalid && email?.touched) {
-          <span class="error-message">
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>task_alt</mat-icon>
+        To-Do List
+      </mat-card-title>
+      <mat-card-subtitle>Inicia sesi�n para gestionar tus tareas</mat-card-subtitle>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput 
+                 type="email" 
+                 formControlName="email" 
+                 placeholder="tu@email.com">
+          <mat-icon matSuffix>email</mat-icon>
+          @if (email?.invalid && email?.touched) {
             @if (email?.errors?.['required']) {
-              El email es requerido
+              <mat-error>El email es requerido</mat-error>
             } @else if (email?.errors?.['email']) {
-              Ingrese un email válido
+              <mat-error>Ingrese un email v�lido</mat-error>
             }
-          </span>
-        }
-      </div>
+          }
+        </mat-form-field>
 
-      <div class="form-group">
-        <label for="password">Contraseña</label>
-        <div class="password-input">
-          <input
-            [type]="showPassword() ? 'text' : 'password'"
-            id="password"
-            formControlName="password"
-            placeholder="••••••••"
-            [class.error]="password?.invalid && password?.touched"
-          />
-          <button type="button" class="toggle-password" (click)="togglePassword()">
-            {{ showPassword() ? '🙈' : '👁️' }}
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Contrase�a</mat-label>
+          <input matInput 
+                 [type]="showPassword() ? 'text' : 'password'" 
+                 formControlName="password"
+                 placeholder="">
+          <button mat-icon-button matSuffix type="button" (click)="togglePassword()">
+            <mat-icon>{{ showPassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
-        </div>
-        @if (password?.invalid && password?.touched) {
-          <span class="error-message">
+          @if (password?.invalid && password?.touched) {
             @if (password?.errors?.['required']) {
-              La contraseña es requerida
+              <mat-error>La contrase�a es requerida</mat-error>
             } @else if (password?.errors?.['minlength']) {
-              La contraseña debe tener al menos 6 caracteres
+              <mat-error>La contrase�a debe tener al menos 6 caracteres</mat-error>
             }
-          </span>
-        }
-      </div>
+          }
+        </mat-form-field>
 
-      <button type="submit" class="btn-primary" [disabled]="loading()">
         @if (loading()) {
-          <span class="spinner"></span>
-          Iniciando sesión...
+          <button mat-raised-button 
+                  color="primary" 
+                  type="button" 
+                  class="full-width submit-btn"
+                  disabled>
+            <mat-spinner diameter="20"></mat-spinner>
+            <span>Iniciando sesi�n...</span>
+          </button>
         } @else {
-          Iniciar Sesión
+          <button mat-raised-button 
+                  color="primary" 
+                  type="submit" 
+                  class="full-width submit-btn">
+            <mat-icon>login</mat-icon>
+            <span>Iniciar Sesi�n</span>
+          </button>
         }
-      </button>
-    </form>
+      </form>
+    </mat-card-content>
 
-    <div class="auth-footer">
-      <p>¿No tienes cuenta? <a routerLink="/register">Regístrate</a></p>
-    </div>
+    <mat-card-actions>
+      <p class="register-link">
+        �No tienes cuenta? 
+        <a mat-button color="accent" routerLink="/register">Reg�strate</a>
+      </p>
+    </mat-card-actions>
 
     <div class="demo-credentials">
-      <p><strong>Credenciales de prueba:</strong></p>
-      <p>Email: test&#64;example.com</p>
-      <p>Contraseña: password123</p>
+      <mat-icon>info</mat-icon>
+      <div>
+        <p><strong>Credenciales de prueba:</strong></p>
+        <p>Email: test&#64;example.com</p>
+        <p>Contrase�a: password123</p>
+      </div>
     </div>
-  </div>
+  </mat-card>
 </div>

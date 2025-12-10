@@ -1,8 +1,12 @@
 <div class="todo-list-container">
   <div class="todo-header">
-    <h2>📋 Mis Tareas</h2>
-    <button class="btn-add" (click)="openForm()">
-      ➕ Nueva Tarea
+    <div class="header-title">
+      <mat-icon>checklist</mat-icon>
+      <h2>Mis Tareas</h2>
+    </div>
+    <button mat-raised-button color="primary" (click)="openForm()">
+      <mat-icon>add</mat-icon>
+      Nueva Tarea
     </button>
   </div>
 
@@ -13,26 +17,34 @@
   </app-todo-filter>
 
   @if (showForm()) {
-    <app-todo-form
-      (submitTodo)="onCreateTodo($event)"
-      (cancel)="closeForm()">
-    </app-todo-form>
+    <mat-card class="form-card">
+      <mat-card-content>
+        <app-todo-form
+          (submitTodo)="onCreateTodo($event)"
+          (cancel)="closeForm()">
+        </app-todo-form>
+      </mat-card-content>
+    </mat-card>
   }
 
   @if (loading()) {
     <div class="loading-container">
-      <div class="spinner-large"></div>
+      <mat-spinner diameter="50"></mat-spinner>
       <p>Cargando tareas...</p>
     </div>
   } @else {
     <div class="todo-items">
       @for (todo of todos(); track trackByTodoId($index, todo)) {
         @if (editingTodo()?.id === todo.id) {
-          <app-todo-form
-            [todo]="todo"
-            (submitTodo)="onUpdateTodo({id: todo.id, todo: $event})"
-            (cancel)="closeForm()">
-          </app-todo-form>
+          <mat-card class="form-card">
+            <mat-card-content>
+              <app-todo-form
+                [todo]="todo"
+                (submitTodo)="onUpdateTodo({id: todo.id, todo: $event})"
+                (cancel)="closeForm()">
+              </app-todo-form>
+            </mat-card-content>
+          </mat-card>
         } @else {
           <app-todo-item
             [todo]="todo"
@@ -42,23 +54,29 @@
           </app-todo-item>
         }
       } @empty {
-        <div class="empty-state">
-          <span class="empty-icon">📝</span>
-          <h3>No hay tareas</h3>
-          <p>
-            @switch (currentFilter()) {
-              @case ('completed') {
-                No tienes tareas completadas
+        <mat-card class="empty-state">
+          <mat-card-content>
+            <mat-icon class="empty-icon">assignment</mat-icon>
+            <h3>No hay tareas</h3>
+            <p>
+              @switch (currentFilter()) {
+                @case ('completed') {
+                  No tienes tareas completadas
+                }
+                @case ('pending') {
+                  No tienes tareas pendientes
+                }
+                @default {
+                  Comienza creando tu primera tarea
+                }
               }
-              @case ('pending') {
-                No tienes tareas pendientes
-              }
-              @default {
-                Comienza creando tu primera tarea
-              }
-            }
-          </p>
-        </div>
+            </p>
+            <button mat-stroked-button color="primary" (click)="openForm()">
+              <mat-icon>add</mat-icon>
+              Crear primera tarea
+            </button>
+          </mat-card-content>
+        </mat-card>
       }
     </div>
   }
